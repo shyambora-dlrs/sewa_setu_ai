@@ -1,0 +1,12 @@
+{
+  "_comment": "Shared tokenizer configuration. Read by BOTH packages/shared/tokenizer.ts (query time) and ingestion/sewasetu_ingest/indexers/tokenizer.py (index time). Changing it requires re-indexing and bumping the BM25 index version.",
+  "version": 1,
+  "min_token_length": 2,
+  "stopwords": [
+    "a","an","the","and","or","of","to","in","on","for","with","by","at","from","is","are","was","were","be","been",
+    "it","its","this","that","these","those","as","if","then","than","can","will","shall","may","should","would",
+    "i","me","my","we","our","you","your","he","she","they","their","what","which","who","whom","how","do","does",
+    "need","needed","required","get","want","please","tell","about","any","all","some","there","here","not","no"
+  ],
+  "bm25": { "k1": 1.2, "b": 0.75, "shard_count": 16 }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "sewasetu-ai",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sewa Setu AI - independent citizen guidance assistant (Cloudflare Worker + React + R2 + Groq + MCP)",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "npm run build && vite preview",
+    "deploy": "npm run build && wrangler deploy -c apps/web/dist/sewasetu_ai/wrangler.json",
+    "typecheck": "tsc -p tsconfig.worker.json && tsc -p tsconfig.web.json",
+    "test": "vitest run",
+    "cf-typegen": "wrangler types",
+    "validate-release": "tsx scripts/validate-release.ts",
+    "smoke": "tsx scripts/local-smoke-test.ts",
+    "build:staging": "CLOUDFLARE_ENV=staging vite build",
+    "test:py": "python3 -m pytest -q ingestion/tests",
+    "schemas": "tsx scripts/export-schemas.ts",
+    "seed:local": "tsx scripts/seed-local-r2.ts",
+    "ingest": "python3 ingestion/run_ingestion.py --output build/release --validate",
+    "check": "npm run typecheck && npm test && npm run test:py && npm run build",
+    "deploy:staging": "npm run build:staging && wrangler deploy -c apps/web/dist/sewasetu_ai/wrangler.json",
+    "mcp:check": "tsx scripts/mcp-client-check.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.4.0",
+    "agents": "^0.33.0",
+    "hono": "^4.13.17",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.68.0",
+    "@cloudflare/workers-types": "^5.20261110.1",
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "jsdom": "^31.0.0",
+    "tailwindcss": "^4.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "5.9",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0",
+    "wrangler": "^4.160.0"
+  }
+}

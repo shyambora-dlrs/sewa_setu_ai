@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "chunk_id": {
+      "type": "string"
+    },
+    "service_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "department_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "section_type": {
+      "type": "string",
+      "enum": [
+        "general",
+        "eligibility",
+        "required_documents",
+        "steps",
+        "fees",
+        "timeline",
+        "appeal",
+        "grievance"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "source_title": {
+      "type": "string"
+    },
+    "page_or_section": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+    },
+    "content_hash": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "as",
+        "hi"
+      ]
+    }
+  },
+  "required": [
+    "chunk_id",
+    "service_id",
+    "department_id",
+    "section_type",
+    "text",
+    "source_url",
+    "source_title",
+    "page_or_section",
+    "retrieved_at",
+    "content_hash",
+    "language"
+  ],
+  "additionalProperties": false
+}

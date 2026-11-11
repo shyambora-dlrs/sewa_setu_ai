@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Material 3 style tonal palette (primary/surface containers, state layers)
+ * combined with Apple-like conventions: system font stack, large rounded surfaces,
+ * generous spacing, translucent navigation bar and 44px+ touch targets.
+ */
+@theme {
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Bengali", "Noto Sans Devanagari", "Helvetica Neue", Arial, sans-serif;
+  --color-primary: #1a56db;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #dbe7ff;
+  --color-on-primary-container: #0b2a6f;
+  --color-surface: #fbfbfd;
+  --color-surface-container: #f1f3f8;
+  --color-surface-high: #e7eaf2;
+  --color-card: #ffffff;
+  --color-ink: #1b1f2a;
+  --color-ink-soft: #4b5365;
+  --color-line: #d9deea;
+  --color-ok: #0f6b3a;
+  --color-ok-container: #d6f3e2;
+  --color-warn: #8a4b00;
+  --color-warn-container: #ffecc7;
+  --color-err: #a31621;
+  --color-err-container: #fde1e3;
+  --radius-card: 1.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #8db1ff;
+    --color-on-primary: #072a73;
+    --color-primary-container: #1d3c80;
+    --color-on-primary-container: #dbe7ff;
+    --color-surface: #101319;
+    --color-surface-container: #181c24;
+    --color-surface-high: #232834;
+    --color-card: #171b23;
+    --color-ink: #eceff6;
+    --color-ink-soft: #aeb6c8;
+    --color-line: #2c3342;
+    --color-ok: #7ddba0;
+    --color-ok-container: #12361f;
+    --color-warn: #ffc56b;
+    --color-warn-container: #3d2a07;
+    --color-err: #ffa2a9;
+    --color-err-container: #4a1519;
+  }
+}
+
+html { color-scheme: light dark; -webkit-text-size-adjust: 100%; }
+body { background: var(--color-surface); color: var(--color-ink); font-family: var(--font-sans); line-height: 1.55; }
+:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* Component classes are Tailwind v4 custom utilities (`@utility`) so they can be composed with @apply. */
+@utility card { @apply rounded-[var(--radius-card)] border border-line bg-card p-5 shadow-sm; }
+@utility btn { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-colors disabled:opacity-50; }
+@utility btn-primary { @apply btn bg-primary text-on-primary hover:opacity-90; }
+@utility btn-tonal { @apply btn bg-primary-container text-on-primary-container hover:opacity-90; }
+@utility btn-outline { @apply btn border border-line bg-card text-ink hover:bg-surface-container; }
+@utility chip { @apply inline-flex items-center rounded-full bg-surface-container px-3 py-1 text-xs font-medium text-ink-soft; }
+@utility input { @apply min-h-11 w-full rounded-xl border border-line bg-card px-4 text-base text-ink placeholder:text-ink-soft; }
+@media print { header, footer, .no-print { display: none !important; } }

@@ -1,0 +1,36 @@
+name: Roll back knowledge release
+
+# Points current.json at an earlier validated release. Releases are immutable, so this only moves the pointer.
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "Release id to activate (see the admin panel or `releases/` in the bucket)"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sewasetu-knowledge-publish
+  cancel-in-progress: false
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install boto3 pyyaml requests beautifulsoup4 lxml pymupdf jsonschema
+      - name: Activate release
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          RELEASE_ID: ${{ inputs.release_id }}
+        run: python ingestion/run_ingestion.py --store r2 --activate "$RELEASE_ID"

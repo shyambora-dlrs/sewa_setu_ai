@@ -1,0 +1,37 @@
+# Approved official sources for ingestion. ONLY hosts listed here are fetched.
+# Add a departmental source only after confirming it is an official, relevant site.
+
+user_agent: "SewaSetuAI-Ingestion/1.0 (independent citizen-guidance project; contact: REPLACE_WITH_PROJECT_CONTACT_EMAIL)"
+
+# Hosts the crawler may request. Everything else (including redirects to other hosts) is refused.
+allowed_hosts:
+  - sewasetu.assam.gov.in
+
+# PDF links found on approved pages may live on other *official* hosts. Suffix match, https only.
+allowed_pdf_host_suffixes:
+  - ".assam.gov.in"
+  - ".gov.in"
+  - ".nic.in"
+
+# Service directory pages: each is an HTML table of Department | Service | Apply link.
+# `category` becomes Service.category. A service listed in several directories keeps the first category.
+directories:
+  - { url: "https://sewasetu.assam.gov.in/site/online/citizen", category: "citizen" }
+  - { url: "https://sewasetu.assam.gov.in/site/online/eodb", category: "eodb" }
+  - { url: "https://sewasetu.assam.gov.in/site/online/schemes", category: "schemes" }
+  - { url: "https://sewasetu.assam.gov.in/site/online/utility", category: "utility" }
+  - { url: "https://sewasetu.assam.gov.in/site/online/service-group/edistrict", category: "edistrict" }
+  - { url: "https://sewasetu.assam.gov.in/site/online/service-group/transport", category: "transport" }
+  - { url: "https://sewasetu.assam.gov.in/site/online/service-group/basundhara", category: "basundhara" }
+  - { url: "https://sewasetu.assam.gov.in/site/online/service-group/eodb", category: "eodb" }
+
+# General guidance pages (not tied to one service). Their text becomes citizen-facing guideline chunks
+# and any linked PDFs are downloaded and extracted. `section_hint` biases the chunk section type.
+guideline_pages:
+  - { url: "https://sewasetu.assam.gov.in/site/appeal-raise", title: "Sewa Setu - Raise an appeal", section_hint: "appeal" }
+  - { url: "https://sewasetu.assam.gov.in/site/faq", title: "Sewa Setu - Frequently asked questions", section_hint: "general" }
+  - { url: "https://sewasetu.assam.gov.in/site/docs", title: "Sewa Setu - Documents and guidelines", section_hint: "general" }
+  - { url: "https://sewasetu.assam.gov.in/site/all_policies", title: "Sewa Setu - Policies", section_hint: "general" }
+
+# Extra PDFs to fetch directly (officially obtained URLs). Keep empty until reviewed.
+extra_pdfs: []

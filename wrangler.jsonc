@@ -1,0 +1,70 @@
+{
+  // Cloudflare Worker serving: React SPA (static assets), REST API (/api/v1/*),
+  // remote MCP endpoint (/mcp) and /health. Top-level config == PRODUCTION.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sewasetu-ai",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "upload_source_maps": true,
+
+  "assets": {
+    // Client-side routes (/services/xyz, /admin ...) fall back to index.html.
+    "not_found_handling": "single-page-application",
+    // These paths must reach the Worker instead of being answered by static assets.
+    "run_worker_first": ["/api/*", "/mcp", "/mcp/*", "/health"]
+  },
+
+  // Private knowledge bucket. Never expose publicly; the Worker reads via this binding only.
+  "r2_buckets": [{ "binding": "KNOWLEDGE_BUCKET", "bucket_name": "sewasetu-knowledge" }],
+
+  // Daily freshness check (monitoring) - heavy ingestion runs in GitHub Actions, not here.
+  "triggers": { "crons": ["30 22 * * *"] },
+
+  "observability": { "enabled": true },
+
+  // Non-secret configuration. Secrets (GROQ_API_KEY, ADMIN_API_TOKEN, ...) are set with `wrangler secret put`.
+  "vars": {
+    "APP_ENV": "production",
+    // Confirmed available via GET /openai/v1/models for the project owner's key (llama-3.3-70b-versatile was NOT);
+    // re-check availability for your account before deploying.
+    "GROQ_MODEL": "openai/gpt-oss-120b",
+    // Citizens only see admin-verified services unless this is "true".
+    "SERVE_UNREVIEWED_CONTENT": "false",
+    "SEMANTIC_SEARCH_ENABLED": "false",
+    "EMBEDDING_MODEL": "@cf/baai/bge-m3",
+    "MAX_RETRIEVAL_CHUNKS": "8",
+    "QUERY_REWRITE_ENABLED": "true",
+    "KNOWLEDGE_STALE_AFTER_HOURS": "72",
+    "GITHUB_REPO": "REPLACE_WITH_OWNER/REPO",
+    "GITHUB_INGEST_WORKFLOW": "ingest-and-publish.yml",
+    "CF_ACCESS_TEAM_DOMAIN": "",
+    "CF_ACCESS_AUD": "",
+    "ADMIN_EMAILS": ""
+  },
+
+  "env": {
+    // `wrangler deploy --env staging` -> worker "sewasetu-ai-staging" with its own bucket.
+    "staging": {
+      "name": "sewasetu-ai-staging",
+      "r2_buckets": [{ "binding": "KNOWLEDGE_BUCKET", "bucket_name": "sewasetu-knowledge-staging" }],
+      "triggers": { "crons": [] },
+      "observability": { "enabled": true },
+      "vars": {
+        "APP_ENV": "staging",
+        "GROQ_MODEL": "openai/gpt-oss-120b",
+        "SERVE_UNREVIEWED_CONTENT": "true",
+        "SEMANTIC_SEARCH_ENABLED": "false",
+        "EMBEDDING_MODEL": "@cf/baai/bge-m3",
+        "MAX_RETRIEVAL_CHUNKS": "8",
+        "QUERY_REWRITE_ENABLED": "true",
+        "KNOWLEDGE_STALE_AFTER_HOURS": "168",
+        "GITHUB_REPO": "REPLACE_WITH_OWNER/REPO",
+        "GITHUB_INGEST_WORKFLOW": "ingest-and-publish.yml",
+        "CF_ACCESS_TEAM_DOMAIN": "",
+        "CF_ACCESS_AUD": "",
+        "ADMIN_EMAILS": ""
+      }
+    }
+  }
+}

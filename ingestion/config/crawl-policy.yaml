@@ -1,0 +1,11 @@
+# Respectful-crawling policy applied by crawler/http.py.
+delay_seconds: 1.0          # minimum gap between two requests to the same host
+timeout_seconds: 30
+max_retries: 3              # transient failures only (timeouts, connection errors, 5xx)
+backoff_base_seconds: 2.0   # exponential: 2s, 4s, 8s ...
+max_retry_after_seconds: 30 # longer Retry-After => give up instead of waiting
+max_html_bytes: 3000000
+max_pdf_bytes: 30000000
+max_pdfs_per_run: 250
+respect_robots_txt: true
+# Never attempted: CAPTCHA solving, login, anti-bot evasion. Such pages are reported as failures.

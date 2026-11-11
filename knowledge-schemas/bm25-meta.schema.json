@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number",
+      "const": 1
+    },
+    "k1": {
+      "type": "number"
+    },
+    "b": {
+      "type": "number"
+    },
+    "doc_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "avg_doc_len": {
+      "type": "number",
+      "minimum": 0
+    },
+    "shard_count": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "doc_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "doc_lens": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 9007199254740991
+      }
+    }
+  },
+  "required": [
+    "version",
+    "k1",
+    "b",
+    "doc_count",
+    "avg_doc_len",
+    "shard_count",
+    "doc_ids",
+    "doc_lens"
+  ],
+  "additionalProperties": false
+}

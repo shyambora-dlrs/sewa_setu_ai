@@ -1,0 +1,6 @@
+# Copy to .dev.vars (git-ignored) for local development. NEVER commit real values.
+GROQ_API_KEY=replace_with_local_groq_key
+# Simple bearer token protecting /admin API when Cloudflare Access is not in front (local dev / fallback).
+ADMIN_API_TOKEN=replace_with_long_random_string
+# Optional: lets the admin panel trigger the ingestion workflow (fine-grained PAT, Actions: write on the repo only).
+GITHUB_DISPATCH_TOKEN=

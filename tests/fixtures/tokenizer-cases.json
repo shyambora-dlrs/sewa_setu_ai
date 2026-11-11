@@ -1,0 +1,122 @@
+{
+  "cases": [
+    {
+      "text": "What documents are required for an Income Certificate?",
+      "tokens": [
+        "document",
+        "income",
+        "certificate"
+      ]
+    },
+    {
+      "text": "Fees/Charges: User/Statutory charges -Rs. 30",
+      "tokens": [
+        "fee",
+        "charge",
+        "user",
+        "statutory",
+        "charge",
+        "rs",
+        "30"
+      ]
+    },
+    {
+      "text": "Application for Trade Licences and certificates",
+      "tokens": [
+        "application",
+        "trade",
+        "licence",
+        "certificate"
+      ]
+    },
+    {
+      "text": "Services of the Revenue & Disaster Management department",
+      "tokens": [
+        "service",
+        "revenue",
+        "disaster",
+        "management",
+        "department"
+      ]
+    },
+    {
+      "text": "আয়ৰ প্ৰমাণপত্ৰৰ বাবে আবেদন",
+      "tokens": [
+        "আয়ৰ",
+        "প্ৰমাণপত্ৰৰ",
+        "বাবে",
+        "আবেদন"
+      ]
+    },
+    {
+      "text": "आय प्रमाण पत्र के लिए आवेदन कैसे करें?",
+      "tokens": [
+        "आय",
+        "प्रमाण",
+        "पत्र",
+        "के",
+        "लिए",
+        "आवेदन",
+        "कैसे",
+        "करें"
+      ]
+    },
+    {
+      "text": "RC ST/SC/OBC 2026 1 a I",
+      "tokens": [
+        "rc",
+        "st",
+        "sc",
+        "obc",
+        "2026",
+        "1"
+      ]
+    },
+    {
+      "text": "class ss bus analysis ties entries glass",
+      "tokens": [
+        "class",
+        "ss",
+        "bus",
+        "analysis",
+        "tie",
+        "entry",
+        "glass"
+      ]
+    },
+    {
+      "text": "ＦＵＬＬＷＩＤＴＨ Ｔｅｘｔ ٣٤٥",
+      "tokens": [
+        "fullwidth",
+        "text",
+        "٣٤٥"
+      ]
+    }
+  ],
+  "hashes": [
+    {
+      "term": "certificate",
+      "fnv1a32": 1173119600
+    },
+    {
+      "term": "income",
+      "fnv1a32": 2023485534
+    },
+    {
+      "term": "আবেদন",
+      "fnv1a32": 3837776301
+    },
+    {
+      "term": "प्रमाण",
+      "fnv1a32": 491520084
+    },
+    {
+      "term": "fee",
+      "fnv1a32": 3221400579
+    },
+    {
+      "term": "trade",
+      "fnv1a32": 1362521689
+    }
+  ]
+}
